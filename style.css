@@ -1,0 +1,218 @@
+
+@import url('https://fonts.cdnfonts.com/css/ica-rubrik-black');
+@import url('https://fonts.cdnfonts.com/css/poppins');
+
+.banner {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.banner .slider {
+    position: absolute;
+    width: 200px;
+    height: 250px;
+    top: 10%;
+    left: calc(50% - 100px);
+    transform-style: preserve-3d;
+    transform: perspective(1000px);
+    animation: autoRun 20s linear infinite;
+    z-index: 1.5;
+}
+
+@keyframes autoRun {
+    from { transform: perspective(1000px) rotateX(-16deg) rotateY(0deg); }
+    to { transform: perspective(1000px) rotateX(-16deg) rotateY(360deg); }
+}
+
+.banner .slider .item {
+    position: absolute;
+    inset: 0 0 0 0;
+    transform: rotateY(calc((var(--position) - 1) * (360 / var(--quantity)) * 1deg)) translateZ(450px);
+}
+
+.banner .slider .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20%;
+    border-color: purple;
+}
+.banner .content {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1400px, 100vw);
+    height: max-content;
+    padding-bottom: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    z-index:  0;
+}
+.banner .content h1 {
+    font-family: 'ICA Rubrik';
+    font-size: 16em;
+    line-height: 1em;
+    background: linear-gradient(to right, #00BFFF, #FF69B4); /* Blue to pink gradient */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+    transform: translateY(100px);
+}
+
+.banner .content h1::after {
+    position: absolute;
+    inset: 0 0 0 0;
+    content: attr(data-content);
+    z-index: 2;
+    -webkit-text-stroke: 2px #d2d2d2;
+    color: transparent;
+}
+.banner .content .author {
+    
+    font-family: Raleway;
+    text-align: right;
+    max-width: 200px;
+    background: linear-gradient(to bottom, #3700ff, #ff0080);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    transform: translateY(60px);
+    filter: drop-shadow();
+    
+    
+}
+
+.banner .content h2 {
+    font-size: 3em;
+}
+
+.zoom-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    z-index: 10000;
+    padding: 2rem;
+    overflow: auto; /* ✅ allows scroll on smaller screens */
+    flex-wrap: wrap; /* ✅ helps responsiveness */
+}
+
+
+.zoom-image-box {
+    flex: 1 1 300px;
+    max-width: 450px;
+    max-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.zoom-image-box img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #fff;
+}
+
+.zoom-dialog {
+    flex: 1 1 350px;
+    max-width: 450px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 12px;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+.zoom-dialog textarea {
+    width: 100%;
+    border-radius: 10px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    resize: vertical;
+    margin-top: 0.5rem;
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.zoom-dialog textarea::placeholder {
+    color: #ccc;
+}
+
+#share-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    background: #00BFFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+#share-btn:hover {
+    background: #0096d6;
+}
+
+
+
+.zoom-dialog h2 {
+    color: #ff69b4;
+    margin-bottom: 10px;
+}
+
+.zoom-dialog p {
+    font-size: 1.2rem;
+}
+
+.close-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1.2rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff69b4;
+    color: black;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: #ff85c1;
+}
+
+.zoom-left {
+    animation: slideInLeft 0.5s ease-out;
+}
+.zoom-right {
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+    from { transform: translateX(-100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+    from { transform: translateX(100px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
